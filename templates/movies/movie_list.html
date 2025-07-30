@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        @media (max-width: 600px) {
+    .movie-card {
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+}
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: #fff;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            color: #ffdd57;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .movie-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .movie-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 280px; /* Slightly larger for poster */
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .movie-title {
+            display: block;
+            margin: 15px 0 5px;
+            font-size: 20px;
+            color: #ffdd57;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .movie-title:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .movie-year, .movie-description {
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+
+        .movie-description {
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎬 Movies List</h1>
+    <div class="movie-container">
+        {% for movie in movies %}
+        <div class="movie-card">
+            <img src="{% static 'images/'|add:movie.poster %}" alt="{{ movie.title }}">
+            <a href="#" class="movie-title">{{ movie.title }}</a>
+            <p class="movie-year">Year: {{ movie.year }}</p>
+            <p class="movie-description">{{ movie.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
